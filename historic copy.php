@@ -20,7 +20,7 @@ $filter_fullName = isset($_GET['fullName']) && $_GET['fullName'] !== '' ? '%'.$_
 
 try {
     // Preparar la consulta
-    $query = "SELECT tr.id, t.name as table_name, r.name, tr.table_id, tr.set_available, DATE_FORMAT(`date`, '%d/%m - %H:%i') as date, u.fullName 
+    $query = "SELECT tr.id, t.name as table_name, r.name, tr.table_id, tr.set_available, DATE_FORMAT(`fecha`, '%d/%m - %H:%i') as date, u.fullName 
     FROM tableRegister tr
     JOIN `table` t ON tr.table_id = t.id
     JOIN room r ON t.room_id = r.id

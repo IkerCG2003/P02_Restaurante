@@ -27,7 +27,7 @@
                 // Verifica si el usuario es un administrador y redirige en consecuencia
                 if ($row['email'] == 'admin@gmail.com') 
                 {
-                    header("Location: ../../admin.php");
+                    header("Location: ../../intermedio.php");
                     exit();
                 } 
                 

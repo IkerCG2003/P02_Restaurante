@@ -1,5 +1,8 @@
 <?php
-    if (!isset($_SESSION["email"])) {
+    session_start();
+
+    if (!isset($_SESSION["email"])) 
+    {
         header("location: ../index.php");
         exit();
     }    
