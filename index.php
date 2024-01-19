@@ -104,6 +104,22 @@
 
                     <br>
 
+                    <div id="cont-sel">
+                        <label for="sel">Rol:</label>
+                        <br>
+                        <select id="rol" name="rol" onchange="validarSel(this)" style="width:20vw; border-radius: 5px;">
+                            <option value="" disabled selected>Seleccione un rol</option>
+                            <option value="cocinero">Cocinero</option>
+                            <option value="camarero">Camarero</option>
+                            <option value="mesero">Mesero</option>
+                            <option value="gerente">Gerente</option>
+                        </select>
+                        <br>
+                        <span id="rol_error" class="error" style="color: red;"></span>
+                    </div>
+                    
+                    <br><br>
+
                     <input type="submit" id="enviar" name="enviar" value="Enviar" disabled>
 
                     <br><br>

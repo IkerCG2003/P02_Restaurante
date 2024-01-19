@@ -89,3 +89,23 @@ span {
     color: white;
 }
 
+#cont-sel {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 20vw;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.error {
+    color: red;
+}

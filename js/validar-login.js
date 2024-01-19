@@ -114,3 +114,19 @@ function validarPwd(input)
 //   }
 // }
 
+function validarSel(select) {
+    const rol = select.value;
+    const errorSelect = document.getElementById("rol");
+    const errorSpan = document.getElementById("rol_error");
+
+    if (rol.trim() === "") {
+        errorSpan.textContent = "Por favor, seleccione un rol.";
+        errorSpan.style.color = "red";
+        errorSelect.style.borderColor = "red";
+    } else {
+        errorSpan.textContent = "";
+        errorSelect.style.borderColor = "blue";
+    }
+}
+
+
