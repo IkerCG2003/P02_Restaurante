@@ -35,6 +35,7 @@ function ListarProductos(valor) {
                 str+="<td>" + item.Apellido +  "</td>";
                 str+="<td>" + item.fullname + "</td>";
                 str+="<td>" + item.email + "</td>";
+                str+="<td>" + item.rol + "</td>";
                 str+="<td>";
                 str=str+ " <button type='button' class='btn btn-success' onclick="+"Editar(" + item.id + ")>Editar</button>";
                 str=str+ " <button type='button' class='btn btn-danger' onclick="+"Eliminar(" + item.id + ")>Eliminar</button>";  

@@ -1,0 +1,67 @@
+/* Estilos adicionales */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-image: url(../img/bg_pattern.png);
+}
+
+.container {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Reducí la intensidad de la sombra */
+    padding: 5px; /* Reducí el espacio interno */
+    border-radius: 8px;
+    margin: 45px; /* Añadí un margen alrededor del contenedor */
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Estilos para hacer la tabla más compacta */
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 8px; /* Ajusta el espacio interno de las celdas */
+    text-align: left;
+}
+
+/* Estilo para resaltar al pasar el mouse sobre una fila de la tabla */
+tbody tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+thead th {
+    background-color: #55608f;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
