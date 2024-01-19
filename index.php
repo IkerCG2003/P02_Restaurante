@@ -104,7 +104,7 @@
 
                     <br>
 
-                    <div id="cont-sel">
+                    <!-- <div id="cont-sel">
                         <label for="sel">Rol:</label>
                         <br>
                         <select id="rol" name="rol" onchange="validarSel(this)" style="width:20vw; border-radius: 5px;">
@@ -116,9 +116,9 @@
                         </select>
                         <br>
                         <span id="rol_error" class="error" style="color: red;"></span>
-                    </div>
+                    </div> -->
                     
-                    <br><br>
+                    <!-- <br><br> -->
 
                     <input type="submit" id="enviar" name="enviar" value="Enviar" disabled>
 

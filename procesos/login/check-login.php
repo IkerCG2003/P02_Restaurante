@@ -3,6 +3,7 @@
 
     $email = $_SESSION['email'];   
     $pwd = $_SESSION['pwd'];
+    $rol = $_SESSION['rol'];
 
     try 
     {

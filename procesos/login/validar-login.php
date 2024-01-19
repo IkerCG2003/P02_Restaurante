@@ -11,9 +11,11 @@
     {
         $email = $_POST["email"];
         $pwd = $_POST["pwd"];
+        $rol = $_POST["rol"];
 
         $_SESSION["email"] = $email;
         $_SESSION["pwd"] = $pwd;
+        $_SESSION['rol'] = $rol;
 
         header("Location: ./check-login.php");
         exit();
