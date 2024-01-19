@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', 'Quicksand', sans-serif;
+    background: #218DCB;
+}
+
+#cont-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 35%;
+    height: 75vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tit {
+    padding: 10% 0%;
+    font-weight: bolder;
+}
+
+#form {
+    padding: 2%;
+    width: 80%;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.error {
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+#enviar {
+    padding: 10px;
+    background-color: rgb(0, 104, 249);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#enviar:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+a {
+    text-decoration: underline;
+    color: #00bfff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+span {
+    font-size: 15px;
+}
+
+#volver {
+    padding: 10px;
+    background-color: rgb(249, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#volver a{
+    text-decoration: none;
+    color: white;
+}
+
