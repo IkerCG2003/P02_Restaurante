@@ -4,6 +4,11 @@ const resultadopaginacion = document.getElementById('resultadopaginacion');
 const resultadosPorPagina = 5; // Cambia esto según tu preferencia
 let paginaActual = 1;
 
+// ----------------------
+// LISTAR USUARIOS
+// ----------------------
+
+
 function ListarProductos(valor, pagina = 1) {
     const formdata = new FormData();
     formdata.append('busqueda', valor);
@@ -27,8 +32,8 @@ function ListarProductos(valor, pagina = 1) {
                 if (i < totalResultados) {
                     const item = json[i];
                     str = "<tr><td>" + item.id + "</td>";
-                    str += "<td>" + item.Nombre + "</td>";
-                    str += "<td>" + item.Apellido + "</td>";
+                    str += "<td>" + item.nombre + "</td>";
+                    str += "<td>" + item.apellido + "</td>";
                     str += "<td>" + item.fullname + "</td>";
                     str += "<td>" + item.email + "</td>";
                     str += "<td>" + item.rol + "</td>";
@@ -53,6 +58,10 @@ function ListarProductos(valor, pagina = 1) {
 
     ajax.send(formdata);
 }
+
+// ----------------------
+// PAGINACIÓN
+// ----------------------
 
 function actualizarPaginacion(totalPages) {
     resultadopaginacion.innerHTML = '';
@@ -79,6 +88,10 @@ buscar.addEventListener('keyup', () => {
 });
 
 ListarProductos('', 1);
+
+// ----------------------
+// ELIMINAR USUARIOS
+// ----------------------
 
 function Eliminar(id) {
     Swal.fire({
@@ -116,4 +129,37 @@ function Eliminar(id) {
             ajax.send(formdata);
         }
     });
+}
+
+// ----------------------
+// EDITAR USUARIO
+// ----------------------
+
+function Editar(id) 
+{
+    var formdata = new FormData();
+
+    formdata.append('id', id);
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.open('POST','editar.php');
+
+    ajax.onload()
+    {
+        if (ajax.status=200) 
+        {
+            var json = JSON.parse(ajax.responseText);
+
+            console.log(json);
+
+            document.getElementById(idp).value = json.id;
+            document.getElementById(nombre).value = json.nombre;
+            document.getElementById(apellido).value = json.apellido;
+            document.getElementById(email).value = json.email;
+            document.getElementById(rol).value = json.rol;
+            document.getElementById(pwd).value = json.pwd;
+        }
+    }
+    ajax.send(formdata);
 }

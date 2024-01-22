@@ -42,7 +42,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"] {
+input[type="text"], select {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -115,12 +115,20 @@ tbody tr:nth-child(even) {
     margin: 0 5px;
     padding: 10px 15px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #55608f;
     color: #fff;
     border: none;
     border-radius: 5px;
 }
 
 #resultadopaginacion button:hover {
-    background-color: #0056b3;
+    background-color: #3347a0;
+}
+
+#btn-enviar{
+    background-color: #55608f;
+}
+
+#btn-enviar:hover{
+    background-color: #3347a0;
 }

@@ -19,6 +19,8 @@
         <div id="frm-register">
             <p style="font-weight: bolder; font-size: 20px;">Inserción de usuarios</p>
             <form action="" method="post" id="frmAgregar">
+                <input type="hidden" name="idp" id="idp" value="">
+
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" name="nombre" id="nombre" class="form-control" required>
@@ -28,19 +30,25 @@
                     <input type="text" name="apellido" id="apellido" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="correo">Correo:</label>
-                    <input type="email" name="correo" id="correo" class="form-control" required>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="rol">Rol:</label>
-                    <input type="text" name="rol" id="rol" class="form-control" required>
+                    <select name="rol" id="rol">
+                        <option value="" disabled>-- Selecciona una opción --</option>
+                        <option value="camarero">Camarero</option>
+                        <option value="mesero">Mesero</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="chef">Chef</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="contrasena">Contraseña:</label>
-                    <input type="password" name="contrasena" id="contrasena" class="form-control" required>
+                    <label for="pwd">Contraseña:</label>
+                    <input type="password" name="pwd" id="pwd" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="submit" id="btn-enviar" class="btn btn-primary">Agregar</button>
                 </div>
             </form>
         </div>
@@ -57,13 +65,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>nombre</th>
-                            <th>apellido</th>
-                            <th>nombre completo</th>
-                            <th>email</th>
-                            <th>rol</th>
-                            <th>acciones</th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Nombre Completo</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
 
