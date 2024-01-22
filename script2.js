@@ -85,6 +85,7 @@ function Eliminar(id) {
         title: '¿Está seguro de eliminar?',
         icon: 'warning',
         showCancelButton: true,
+        position: 'top-end',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí',
@@ -103,6 +104,7 @@ function Eliminar(id) {
                         ListarProductos('');
                         Swal.fire({
                             icon: 'success',
+                            position: 'top-end',
                             title: 'Eliminado',
                             showConfirmButton: false,
                             timer: 1500
