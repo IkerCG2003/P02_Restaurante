@@ -66,7 +66,7 @@ tbody tr:nth-child(even) {
 }
 
 #resultado tr {
-    height: 50px; /* Ajusta la altura según tus necesidades */
+    height: 75px; /* Ajusta la altura según tus necesidades */
 }
 
 /* Estilos paginación */

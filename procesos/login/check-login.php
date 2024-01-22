@@ -39,13 +39,13 @@
             } 
             else 
             {
-                header("Location: ../../login.php?error=UserMal");
+                header("Location: ../../index.php?error=UserMal");
                 exit();
             }
         } 
         else 
         {
-            header("Location: ../../login.php?error=UserMal");
+            header("Location: ../../index.php?error=UserMal");
             exit();
         }
 
