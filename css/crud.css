@@ -1,5 +1,4 @@
 /* Estilos adicionales */
-
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -8,13 +7,28 @@ body {
 
 .container {
     background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Reducí la intensidad de la sombra */
-    padding: 5px; /* Reducí el espacio interno */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     border-radius: 8px;
-    margin: 45px; /* Añadí un margen alrededor del contenedor */
+    margin: 45px;
+    display: flex;
+}
+
+#frm-register {
+    flex: 1; /* Ocupa el 25% del ancho */
+    max-width: 25%;
+    margin-right: 20px;
+}
+
+#cnt-crud {
+    flex: 3; /* Ocupa el 75% del ancho */
+    max-width: 75%;
 }
 
 form {
+    width: 100%;
+    max-width: none; /* Restablece el ancho máximo para que ocupe el 100% de #frm-register */
+    margin: auto;
     margin-bottom: 20px;
 }
 
@@ -30,30 +44,27 @@ label {
 
 input[type="text"] {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
-/* Estilos para hacer la tabla más compacta */
-
+/* Estilos para hacer la tabla más atractiva */
 table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 8px; /* Ajusta el espacio interno de las celdas */
+    padding: 12px;
     text-align: left;
 }
 
-/* Estilo para resaltar al pasar el mouse sobre una fila de la tabla */
 tbody tr:hover {
-    background-color: #ddd;
-    cursor: pointer;
+    background-color: #f5f5f5;
 }
 
 thead th {
@@ -62,15 +73,39 @@ thead th {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #e8e8e8;
 }
 
 #resultado tr {
-    height: 75px; /* Ajusta la altura según tus necesidades */
+    height: 50px;
+}
+
+/* Estilos para combinar los botones en la columna "acciones" */
+.acciones-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.acciones-btns button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.acciones-btns button:nth-child(1) {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.acciones-btns button:nth-child(2) {
+    background-color: #d9534f;
+    color: #fff;
 }
 
 /* Estilos paginación */
-
 #resultadopaginacion {
     text-align: center;
     margin-top: 20px;
@@ -78,7 +113,7 @@ tbody tr:nth-child(even) {
 
 #resultadopaginacion button {
     margin: 0 5px;
-    padding: 5px 10px;
+    padding: 10px 15px;
     cursor: pointer;
     background-color: #007bff;
     color: #fff;
@@ -89,6 +124,3 @@ tbody tr:nth-child(even) {
 #resultadopaginacion button:hover {
     background-color: #0056b3;
 }
-
-
-
