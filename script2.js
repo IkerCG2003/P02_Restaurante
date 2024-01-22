@@ -79,3 +79,39 @@ buscar.addEventListener('keyup', () => {
 });
 
 ListarProductos('', 1);
+
+function Eliminar(id) {
+    Swal.fire({
+        title: '¿Está seguro de eliminar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'NO'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var formdata = new FormData();
+            formdata.append('id', id);
+
+            var ajax = new XMLHttpRequest();
+            ajax.open('POST', 'eliminar.php');
+
+            ajax.onload = function () {
+                if (ajax.status === 200) {
+                    if (ajax.responseText === "ok") {
+                        ListarProductos('');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Eliminado',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+            };
+
+            ajax.send(formdata);
+        }
+    });
+}
