@@ -65,3 +65,30 @@ tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+#resultado tr {
+    height: 50px; /* Ajusta la altura según tus necesidades */
+}
+
+/* Estilos paginación */
+
+#resultadopaginacion {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#resultadopaginacion button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+#resultadopaginacion button:hover {
+    background-color: #0056b3;
+}
+
+
+
