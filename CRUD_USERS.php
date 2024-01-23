@@ -15,83 +15,99 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id="frm-register">
-            <p style="font-weight: bolder; font-size: 20px;">Inserción de usuarios</p>
-            <form action="" method="POST" id="frm">
-                <div class="form-group">
-                    <input type="hidden" name="idp" id="idp" value="">
+    <div>
+        <div class="container-header">
+            <div class="row">
+                <div class="column-1 header">
+                    <div class="header-left"></div>
+                    <div class="header-center">
+                        <h1 class="header-center-index" onclick="window.location.href='./admin.php'">Gestión</h1>
+                        <h1 class="header-center-historic" onclick="window.location.href='./historic.php'" style="background-color: #00000050">Histórico</h1>
+                        <h1 class="header-center-exit" onclick="window.location.href='./index.php'">Salir</h1>
+                    </div>
+                    <div class="header-right"></div>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" name="apellido" id="apellido" placeholder="Introduce el apellido" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="fullname">Nombre Completo:</label>
-                    <input type="text" name="fullname" id="fullname" placeholder="Introduce el nombre completo" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="Introduce el email" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="rol">Rol:</label>
-                    <input type="text" name="rol" id="rol" placeholder="Introduce el rol" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="pwd">Contraseña:</label>
-                    <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Introduce la contraseña" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="button" value="Registrar" id="btn-enviar" class="btn btn-primary btn-block">
-                </div>
-            </form>
+            </div>
         </div>
 
-        <div id="cnt-crud">
-            <form action="" method="post" id="frmbusqueda">
-                <div class="form-group">
-                    <label for="buscar">Buscar:</label>
-                    <input type="text" name="buscar" id="buscar" placeholder="Buscar..." class="form-control">
-                </div>
-            </form>
+        <div class="container">
+            <div id="frm-register">
+                <p style="font-weight: bolder; font-size: 20px;">Inserción de usuarios</p>
+                <form action="" method="POST" id="frm">
+                    <div class="form-group">
+                        <input type="hidden" name="idp" id="idp" value="">
+                    </div>
 
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Nombre Completo</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
 
-                    <tbody id="resultado"></tbody>
-                </table>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" id="apellido" placeholder="Introduce el apellido" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullname">Nombre Completo:</label>
+                        <input type="text" name="fullname" id="fullname" placeholder="Introduce el nombre completo" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" placeholder="Introduce el email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <input type="text" name="rol" id="rol" placeholder="Introduce el rol" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Contraseña:</label>
+                        <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Introduce la contraseña" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" value="Registrar" id="btn-enviar" class="btn btn-primary btn-block">
+                    </div>
+                </form>
             </div>
 
+            <div id="cnt-crud">
+                <form action="" method="post" id="frmbusqueda">
+                    <div class="form-group">
+                        <label for="buscar">Buscar:</label>
+                        <input type="text" name="buscar" id="buscar" placeholder="Buscar..." class="form-control">
+                    </div>
+                </form>
 
-            <div id="paginationControls"></div>
-            <div id="paginatedResults">
-                <table id="resultadopaginacion">
-                    <!-- Los resultados se mostrarán aquí -->
-                </table>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="resultado"></tbody>
+                    </table>
+                </div>
+
+
+                <div id="paginationControls"></div>
+                <div id="paginatedResults">
+                    <table id="resultadopaginacion">
+                        <!-- Los resultados se mostrarán aquí -->
+                    </table>
+                </div>
             </div>
         </div>
     </div>
