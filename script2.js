@@ -1,15 +1,9 @@
 const buscar = document.getElementById('buscar');
 const resultado = document.getElementById('resultado');
-const resultadopaginacion = document.getElementById('resultadopaginacion');
-const resultadosPorPagina = 5; // Cambia esto según tu preferencia
+const resultadosPorPagina = 5; 
 let paginaActual = 1;
 
-// ----------------------
-// LISTAR USUARIOS
-// ----------------------
-
-
-function ListarProductos(valor, pagina = 1) {
+function ListarUser(valor, pagina = 1) {
     const formdata = new FormData();
     formdata.append('busqueda', valor);
 
@@ -19,7 +13,7 @@ function ListarProductos(valor, pagina = 1) {
     ajax.onload = function () {
         let str = "";
 
-        if (ajax.status == 200) {
+        if (ajax.status === 200) {
             const json = JSON.parse(ajax.responseText);
             const totalResultados = json.length;
             const totalPages = Math.ceil(totalResultados / resultadosPorPagina);
@@ -43,7 +37,6 @@ function ListarProductos(valor, pagina = 1) {
                     str += "</td> ";
                     str += "</tr>";
                 } else {
-                    // Si no hay suficientes resultados, agregar celdas vacías
                     str = "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
                 }
                 tabla += str;
@@ -59,10 +52,6 @@ function ListarProductos(valor, pagina = 1) {
     ajax.send(formdata);
 }
 
-// ----------------------
-// PAGINACIÓN
-// ----------------------
-
 function actualizarPaginacion(totalPages) {
     resultadopaginacion.innerHTML = '';
 
@@ -71,7 +60,7 @@ function actualizarPaginacion(totalPages) {
         button.textContent = i;
         button.addEventListener('click', function () {
             paginaActual = i;
-            ListarProductos(buscar.value, paginaActual);
+            ListarUser(buscar.value, paginaActual);
         });
 
         resultadopaginacion.appendChild(button);
@@ -81,17 +70,90 @@ function actualizarPaginacion(totalPages) {
 buscar.addEventListener('keyup', () => {
     const valor = buscar.value;
     if (valor == "") {
-        ListarProductos('', 1);
+        ListarUser('', 1);
     } else {
-        ListarProductos(valor, 1);
+        ListarUser(valor, 1);
     }
 });
 
-ListarProductos('', 1);
+ListarUser('', 1);
 
-// ----------------------
-// ELIMINAR USUARIOS
-// ----------------------
+function Editar(id) {
+    var formdata = new FormData();
+    formdata.append('id', id);
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.open('POST', 'editar.php');
+
+    ajax.onload = function () {
+        if (ajax.status === 200) {
+            const json = JSON.parse(ajax.responseText);
+
+            console.log(json);
+
+            document.getElementById('idp').value = json.id;
+            document.getElementById('nombre').value = json.nombre;
+            document.getElementById('apellido').value = json.apellido;
+            document.getElementById('fullname').value = json.fullname;
+            document.getElementById('email').value = json.email;
+            document.getElementById('rol').value = json.rol;
+            document.getElementById('pwd').value = json.pwd;
+            document.getElementById('btn-enviar').value = "Actualizar";
+        }
+    }
+
+    ajax.send(formdata);
+}
+
+document.getElementById('btn-enviar').addEventListener("click", () => 
+{
+    var form = document.getElementById('frm');
+    var formdata = new FormData(form);
+    var ajax = new XMLHttpRequest();
+
+    ajax.open('POST', 'registrar.php');
+    
+    ajax.onload = function () 
+    {
+        if (ajax.status === 200)
+        {
+            if (ajax.responseText == "ok") {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Registrado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                form.reset();
+                ListarProductos('');
+            } 
+            
+            else 
+            {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Modificado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                document.getElementById('btn-enviar').value = "Registrar";
+                idp.value = "";
+                form.reset();
+                ListarProductos('');
+            }
+        } 
+        
+        else 
+        {
+            respuesta_ajax.innerText = 'Error';
+        }
+    }
+    ajax.send(formdata);
+});
 
 function Eliminar(id) {
     Swal.fire({
@@ -113,8 +175,9 @@ function Eliminar(id) {
 
             ajax.onload = function () {
                 if (ajax.status === 200) {
+                    console.log('Eliminado');
                     if (ajax.responseText === "ok") {
-                        ListarProductos('');
+                        ListarUser('');
                         Swal.fire({
                             icon: 'success',
                             position: 'top-end',
@@ -125,41 +188,7 @@ function Eliminar(id) {
                     }
                 }
             };
-
             ajax.send(formdata);
         }
     });
-}
-
-// ----------------------
-// EDITAR USUARIO
-// ----------------------
-
-function Editar(id) 
-{
-    var formdata = new FormData();
-
-    formdata.append('id', id);
-
-    var ajax = new XMLHttpRequest();
-
-    ajax.open('POST','editar.php');
-
-    ajax.onload()
-    {
-        if (ajax.status=200) 
-        {
-            var json = JSON.parse(ajax.responseText);
-
-            console.log(json);
-
-            document.getElementById(idp).value = json.id;
-            document.getElementById(nombre).value = json.nombre;
-            document.getElementById(apellido).value = json.apellido;
-            document.getElementById(email).value = json.email;
-            document.getElementById(rol).value = json.rol;
-            document.getElementById(pwd).value = json.pwd;
-        }
-    }
-    ajax.send(formdata);
 }
