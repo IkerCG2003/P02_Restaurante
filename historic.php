@@ -5,8 +5,6 @@
         header("location: ./index.php");
         exit();
     }
-
-    include_once("./herramientas/conexion.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +13,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/_styles.css">
-    <title>Document</title>
+    <title>Histórico</title>
 </head>
 
-<body>
+<body>    
     <div class="container">
         <div class="row">
             <div class="column-1 header">
@@ -31,6 +29,13 @@
                 <div class="header-right"></div>
             </div>
         </div>
+
+        <form action="" method="post" id="frmbusqueda">
+            <div class="form-group">
+                <label for="buscar">Buscar:</label>
+                <input type="text" name="buscar" id="buscar" placeholder="Buscar..." class="form-control">
+            </div>
+        </form>
 
         <div class="content">
             <div class="row">
@@ -46,12 +51,20 @@
                                 <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody id="resultados"></tbody>
+                        <tbody id="resultado"></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <script src="./script3.js"></script>
-    </body>
+        <div id="paginationControls"></div>
+        <div id="paginatedResults">
+            <table id="resultadopaginacion">
+                <!-- Los resultados se mostrarán aquí -->
+            </table>
+        </div>
+    </div> <!-- Close the container div -->
+
+    <script src="./script3.js"></script>
+</body>
 </html>
