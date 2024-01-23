@@ -21,6 +21,10 @@
             <form action="" method="POST" id="frm">
                 <div class="form-group">
                     <input type="hidden" name="idp" id="idp" value="">
+                </div>
+
+
+                <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre" class="form-control" required>
                 </div>
