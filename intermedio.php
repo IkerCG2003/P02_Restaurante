@@ -16,7 +16,7 @@
 
     <body>
         <h1>ELIGE QUE QUIERES VER</h1>
-        <h3><a href="./CRUD.php">CRUD CON AJAX</a></h3>
-        <h3><a href="./admin.php">PROYECTO NORMAL (HISTORIC.PHP CON AJAX)</a></h3>
+        <h3><a href="./CRUD_USERS.php">CRUD DE LOS USUARIOS CON AJAX</a></h3>
+        <h3><a href="./admin.php">PROYECTO NORMAL</a></h3>
     </body>
 </html>
