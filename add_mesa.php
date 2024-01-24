@@ -4,17 +4,30 @@ include './herramientas/conexion.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $tipoSala = $_POST['tipoSala'];
-    $imagenSala = $_POST['imagenSala'];
     $cantidadMesas = $_POST['cantidadMesas'];
 
     // Generar nombre único para la sala
-    $nombreSala = $tipoSala . '_' . uniqid();
+    if ($tipoSala = 'terrace') 
+    {
+        $tipoSala = 'Terraza';
+    }
+
+    elseif ($tipoSala = 'hall') 
+    {
+        $tipoSala = 'Comedor';
+    }
+
+    else
+    {
+        $tipoSala = 'Sala Privada';
+    }
+
+    $nombreSala = $tipoSala . ' ' . random_int(1 , 50);
 
     // Insertar en la tabla room
     try {
-        $stmt = $pdo->prepare("INSERT INTO room (name, img) VALUES (:nombreSala, :imagenSala)");
+        $stmt = $pdo->prepare("INSERT INTO room (name) VALUES (:nombreSala)");
         $stmt->bindParam(':nombreSala', $nombreSala);
-        $stmt->bindParam(':imagenSala', $imagenSala);
         $stmt->execute();
         $room_id = $pdo->lastInsertId(); // Obtener el ID de la sala recién insertada
     } catch (PDOException $e) {
@@ -36,15 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':room_id', $room_id);
 
             $stmt->execute();
-
-            header('Location: ./CRUD_MESAS.php?message=salaInsertada');
-            die();
         }
+
+        header('Location: ./CRUD_MESAS.php?message=salaInsertada');
+        die();
     } catch (PDOException $e) {
         echo "Error al insertar en la tabla table: " . $e->getMessage();
         header('Location: ./CRUD_MESAS.php?error=salaNoInsertada');
         die();
     }
-
 }
 ?>

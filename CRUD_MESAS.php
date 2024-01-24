@@ -7,18 +7,15 @@ if (!isset($_SESSION["email"])) {
 
 include_once("./herramientas/conexion.php");
 
-if (isset($_GET["room"])) 
-{
+if (isset($_GET["room"])) {
     $room_id = htmlspecialchars($_GET["room"], ENT_QUOTES, 'UTF-8');
 }
 
-try 
-{
+try {
     $pdo = new PDO("mysql:host=$dbserver;dbname=$dbbasedatos", $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if (isset($room_id)) 
-    {
+    if (isset($room_id)) {
         // consultar mesas de $room_id
         $sql_mesas = "SELECT t.id as table_id, t.name as table_name, t.available as available, 
                         IF(t.available=1, 'Disponible', 'Ocupada') as table_available,
@@ -30,14 +27,10 @@ try
         $stmt_mesas->execute();
         $resultado_mesas = $stmt_mesas->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!$resultado_mesas) 
-        {
+        if (!$resultado_mesas) {
             die('Error: Unable to fetch table data');
         }
-    } 
-    
-    else 
-    {
+    } else {
         // consultar salas
         $sql_salas = "SELECT r.id as room_id, 
                         CASE 
@@ -56,21 +49,14 @@ try
         $stmt_salas->execute();
         $resultado_salas = $stmt_salas->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!$resultado_salas) 
-        {
+        if (!$resultado_salas) {
             die('Error: Unable to fetch room data');
         }
     }
-} 
-
-catch (PDOException $e) 
-{
+} catch (PDOException $e) {
     echo "Error al leer la base de datos: " . $e->getMessage();
     die();
-} 
-
-finally 
-{
+} finally {
     $pdo = null;
 }
 ?>
@@ -91,7 +77,7 @@ finally
             <div class="column-1 header">
                 <div class="header-left"></div>
                 <div class="header-center">
-                    <h1 class="header-center-index" onclick="window.location.href='admin.php'" style="background-color: #00000050">Gestión</h1>
+                    <h1 class="header-center-index" onclick="window.location.href='CRUD_MESAS.php'" style="background-color: #00000050">Gestión</h1>
                     <h1 class="header-center-historic" onclick="window.location.href='./historic.php'">Histórico</h1>
                     <h1 class="header-center-exit" onclick="window.location.href='./intermedio.php'">Volver</h1>
                 </div>
@@ -108,7 +94,6 @@ finally
             </div>
         </div>
 
-
         <div class="row">
             <div class="column-3 sidebar" id="cont-form">
                 <form id="salaForm" method="POST" action="add_mesa.php">
@@ -122,11 +107,6 @@ finally
                     </div>
 
                     <div class="form-group">
-                        <label for="imagenSala">Imagen de la Sala:</label>
-                        <input type="file" id="imagenSala" name="imagenSala" accept="image/*" required>
-                    </div>
-
-                    <div class="form-group">
                         <label for="cantidadMesas">Cantidad de Mesas:</label>
                         <input type="number" id="cantidadMesas" name="cantidadMesas" min="0" required>
                     </div>
@@ -136,9 +116,7 @@ finally
             </div>
 
             <div class="column-9 content" id="cont-mesas">
-
                 <div class="content-gestion">
-
                     <form name="formMesa" id="formMesa" action="./cambiarEstadoMesa-CRUD_MESA.php" method="GET">
                         <input type="hidden" name="form_room_id" id="form_room_id" value="">
                         <input type="hidden" name="form_table" id="form_table" value="">
@@ -151,10 +129,21 @@ finally
                         { // imprimir mesas de sala
                             foreach ($resultado_mesas as $mesa) 
                             {
+                                $imagenMesa = "./img/room_table.png"; // Ruta por defecto
+
+                                // Lógica para obtener la imagen de la mesa del directorio
+                                $directorioImagenes = "./img/mesas/"; // Ruta del directorio de imágenes
+                                $nombreImagen = "mesa_" . $mesa["table_id"] . ".png"; // Nombre único de la imagen
+                                $rutaCompleta = $directorioImagenes . $nombreImagen;
+
+                                if (file_exists($rutaCompleta)) {
+                                    $imagenMesa = $rutaCompleta;
+                                }
+
                                 echo '
                                     <div class="column-5 content-gestion-content-item" onClick="SendMesa(\'' . $mesa["table_id"] . '\',\'' . $mesa["available"] . '\',\'' . $room_id . '\')">
                                         <div class="content-gestion-content-item-image">
-                                            <img src="./img/room_table.png" alt="">
+                                            <img src="' . $imagenMesa . '" alt="">
                                         </div>
 
                                         <div class="content-gestion-content-item-bottom" style="background-color: ' . $mesa["table_color"] . '">
@@ -173,6 +162,7 @@ finally
                                         <div class="content-gestion-content-item-image">
                                             <img src="./img/room_' . $sala["room_name"] . '.png" alt="">
                                         </div>
+
                                         <div class="content-gestion-content-item-bottom">
                                             <span><span class="hideAtSmall">Mesas:</span> ' . $sala["table_available"] . '/' . $sala["table_count"] . '</span>
                                         </div>
@@ -186,16 +176,15 @@ finally
         </div>
     </div>
 
-    <!-- Script para las validaciones -->
-    <script>
+<!-- Script para las validaciones -->
+<script>
         function validarFormulario() 
         {
             var tipoSala = document.getElementById('tipoSala').value;
-            var imagenSala = document.getElementById('imagenSala').value;
             var cantidadMesas = document.getElementById('cantidadMesas').value;
 
             // Validaciones
-            if (tipoSala === "" || imagenSala === "" || cantidadMesas === "") 
+            if (tipoSala === "" || cantidadMesas === "") 
             {
                 alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
                 return;
