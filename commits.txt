@@ -1,0 +1,117 @@
+Autor: IkerCG2003
+Descripción: Arreglo en el historico, cuando es 1 está libre, cuando es 0 está ocupado
+
+Autor: IkerCG2003
+Descripción: Arreglo en el historico, ahora cuando es 1, la mesa está libre, cuando es 0, está ocupada.
+Arreglo de las imagenes del crud
+
+Autor: IkerCG2003
+Descripción: Se corrigieron las imágenes en el CRUD.
+CRUD SALAS FUNCIONA - FALTA ARREGLAR IMAGENES
+
+Autor: IkerCG2003
+Descripción: El CRUD de salas ahora funciona, pero se necesita corregir las imágenes.
+Arreglos en crud_mesas.php
+
+Autor: IkerCG2003
+Descripción: Se realizaron arreglos en el archivo crud_mesas.php.
+Estilos arreglados de historic.php
+
+Autor: IkerCG2003
+Descripción: Se corrigieron los estilos en historic.php.
+Validaciones del CRUD
+
+Autor: IkerCG2003
+Descripción: Se agregaron validaciones en el CRUD.
+Arreglos en redirecciones
+
+Autor: IkerCG2003
+Descripción: Se realizaron arreglos en las redirecciones.
+Merge branch 'main' of https://github.com/IkerCG2003/P02_Restaurante
+
+Autor: IkerCG2003
+Descripción: Fusionando cambios del branch principal.
+CRUD mesas + estilos + arreglos en otras páginas
+
+Autor: IkerCG2003
+Descripción: Se implementó el CRUD de mesas con estilos y se realizaron arreglos en otras páginas.
+Update README.md
+
+Autor: IkerCG2003
+Descripción: Actualización del archivo README.md.
+Historico con ajax
+
+Autor: IkerCG2003
+Descripción: Se implementó la funcionalidad de historico con AJAX.
+Encabezado cud
+
+Autor: IkerCG2003
+Descripción: Se añadió un encabezado para CUD.
+Pagina de camareros + redirecciones + conexión
+
+Autor: IkerCG2003
+Descripción: Se creó la página de camareros con redirecciones y conexión.
+EDITAR MEDIO FUNCIONAL CRUD
+
+Autor: IkerCG2003
+Descripción: Se implementó la funcionalidad de editar en el CRUD.
+INSERT CRUD FUNCIONAL
+
+Autor: IkerCG2003
+Descripción: Se implementó la funcionalidad de insertar en el CRUD.
+Editar.php
+
+Autor: IkerCG2003
+Descripción: Modificaciones en el archivo editar.php.
+Formulario inserción user + estilos
+
+Autor: IkerCG2003
+Descripción: Se creó el formulario de inserción de usuarios con estilos.
+Arreglos en posicion sweet alert
+
+Autor: IkerCG2003
+Descripción: Se realizaron arreglos en la posición de Sweet Alert.
+Funcion eliminar CRUD
+
+Autor: IkerCG2003
+Descripción: Se implementó la función de eliminar en el CRUD.
+Arreglos en los estilos
+
+Autor: IkerCG2003
+Descripción: Se realizaron arreglos en los estilos.
+Paginación + estilos CRUD
+
+Autor: IkerCG2003
+Descripción: Se implementó la paginación y se realizaron ajustes en los estilos del CRUD.
+Estilos en CRUD + arreglos en funcionamiento
+
+Autor: IkerCG2003
+Descripción: Se aplicaron estilos al CRUD y se realizaron ajustes en el funcionamiento.
+CRUD con AJAX (falta editar y eliminar)
+
+Autor: IkerCG2003
+Descripción: Se implementó el CRUD con AJAX, aunque falta completar las funciones de editar y eliminar.
+Historico con ajax (falta revisión)
+
+Autor: IkerCG2003
+Descripción: Se implementó la funcionalidad de historico con AJAX, aunque aún necesita revisión.
+Empezando historico con ajax
+
+Autor: IkerCG2003
+Descripción: Inicio de la implementación de historico con AJAX.
+Arreglos en login
+
+Autor: IkerCG2003
+Descripción: Se realizaron arreglos en la página de login.
+Cambios en el login
+
+Autor: IkerCG2003
+Descripción: Se realizaron cambios básicos en la página de login.
+Cambios básicos en el proyecto - Primer commit - No había leído la parte de sincronización diaria
+
+Autor: IkerCG2003
+Descripción: Cambios iniciales en el proyecto - Primer commit - Reconocimiento de la falta de sincronización diaria.
+Initial commit
+
+Autor: IkerCG2003
+Descripción: Commit inicial del proyecto.
