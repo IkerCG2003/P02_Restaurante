@@ -90,7 +90,7 @@
                 <div class="header-left"></div>
                 <div class="header-center">
                     <h1 class="header-center-index" onclick="window.location.href='./camarero.php'" style="background-color: #00000050">Gestión</h1>
-                    <h1 class="header-center-exit" onclick="window.location.href='./index.php'">Salir</h1>
+                    <h1 class="header-center-exit" onclick="window.location.href='./intermedio.php'">Volver</h1>
                 </div>
                 <div class="header-right"></div>
             </div>

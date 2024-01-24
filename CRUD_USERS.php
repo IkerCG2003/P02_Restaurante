@@ -23,7 +23,7 @@
                     <div class="header-center">
                         <h1 class="header-center-index" onclick="window.location.href='./admin.php'">Gestión</h1>
                         <h1 class="header-center-historic" onclick="window.location.href='./historic.php'" style="background-color: #00000050">Histórico</h1>
-                        <h1 class="header-center-exit" onclick="window.location.href='./index.php'">Salir</h1>
+                        <h1 class="header-center-exit" onclick="window.location.href='./intermedio.php'">Volver</h1>
                     </div>
                     <div class="header-right"></div>
                 </div>

@@ -85,13 +85,13 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row-header">
             <div class="column-1 header">
                 <div class="header-left"></div>
                 <div class="header-center">
                     <h1 class="header-center-index" onclick="window.location.href='admin.php'" style="background-color: #00000050">Gestión</h1>
                     <h1 class="header-center-historic" onclick="window.location.href='./historic.php'">Histórico</h1>
-                    <h1 class="header-center-exit" onclick="window.location.href='./index.php'">Salir</h1>
+                    <h1 class="header-center-exit" onclick="window.location.href='./intermedio.php'">Volver</h1>
                 </div>
                 <div class="header-right"></div>
             </div>
