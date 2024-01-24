@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="button" value="Registrar" id="btn-enviar" class="btn btn-primary btn-block">
+                        <input type="button" value="Registrar" id="btn-enviar" class="btn btn-primary btn-block" disabled>
                     </div>
                 </form>
             </div>
@@ -114,6 +114,73 @@
 
     <script src="./script2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Llamada inicial para verificar el estado del botón al cargar la página
+            verificarCamposLlenos();
+
+            // Agrega un evento de escucha al formulario
+            document.getElementById("frm").addEventListener("input", function () {
+                verificarCamposLlenos();
+            });
+
+            document.getElementById("btn-enviar").addEventListener("click", function (event) {
+                event.preventDefault(); // Evita el envío automático del formulario
+                validarFormulario();
+            });
+        });
+
+        function verificarCamposLlenos() {
+            var nombre = document.getElementById('nombre').value;
+            var apellido = document.getElementById('apellido').value;
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var rol = document.getElementById('rol').value;
+            var pwd = document.getElementById('pwd').value;
+
+            var botonEnviar = document.getElementById('btn-enviar');
+
+            // Habilitar el botón si todos los campos están llenos, deshabilitarlo de lo contrario
+            botonEnviar.disabled = !(nombre && apellido && fullname && email && rol && pwd);
+        }
+
+        function validarFormulario() {
+            var nombre = document.getElementById('nombre').value;
+            var apellido = document.getElementById('apellido').value;
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var rol = document.getElementById('rol').value;
+            var pwd = document.getElementById('pwd').value;
+
+            // Validaciones
+            if (nombre === "" || apellido === "" || fullname === "" || email === "" || rol === "" || pwd === "") {
+                alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
+                return;
+            }
+
+            // Validación de formato de nombre y apellido (solo letras)
+            var regexLetras = /^[a-zA-Z\s]*$/; // Acepta solo letras y espacios
+
+            if (!regexLetras.test(nombre) || !regexLetras.test(apellido) || !regexLetras.test(fullname)) {
+                alert("Nombre, apellido y nombre completo solo pueden contener letras y espacios.");
+                return;
+            }
+
+            // Validación de dominio de correo electrónico
+            var regexEmail = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+
+            if (!regexEmail.test(email)) {
+                alert("El email debe pertenecer al dominio @gmail.com");
+                return;
+            }
+
+            // Resto de validaciones si es necesario
+
+            // Si pasa las validaciones, puedes enviar el formulario o realizar otras acciones.
+            document.getElementById('frm').submit();
+        }
+    </script>
+
 </body>
 
 </html>
