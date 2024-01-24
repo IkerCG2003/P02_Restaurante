@@ -188,18 +188,21 @@ finally
 
     <!-- Script para las validaciones -->
     <script>
-        function validarFormulario() {
+        function validarFormulario() 
+        {
             var tipoSala = document.getElementById('tipoSala').value;
             var imagenSala = document.getElementById('imagenSala').value;
             var cantidadMesas = document.getElementById('cantidadMesas').value;
 
             // Validaciones
-            if (tipoSala === "" || imagenSala === "" || cantidadMesas === "") {
+            if (tipoSala === "" || imagenSala === "" || cantidadMesas === "") 
+            {
                 alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
                 return;
             }
 
-            if (parseInt(cantidadMesas) < 0) {
+            if (parseInt(cantidadMesas) < 0) 
+            {
                 alert("La cantidad de mesas no puede ser un número negativo.");
                 return;
             }
@@ -208,7 +211,8 @@ finally
             document.getElementById('salaForm').submit();
         }
 
-        function SendMesa(id_mesa, mesa_disponible, room_id) {
+        function SendMesa(id_mesa, mesa_disponible, room_id) 
+        {
             document.getElementById("form_room_id").value = room_id;
             document.getElementById("form_table").value = id_mesa;
             document.getElementById("form_table_available").value = mesa_disponible;
