@@ -7,15 +7,18 @@ if (!isset($_SESSION["email"])) {
 
 include_once("./herramientas/conexion.php");
 
-if (isset($_GET["room"])) {
+if (isset($_GET["room"])) 
+{
     $room_id = htmlspecialchars($_GET["room"], ENT_QUOTES, 'UTF-8');
 }
 
-try {
+try 
+{
     $pdo = new PDO("mysql:host=$dbserver;dbname=$dbbasedatos", $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if (isset($room_id)) {
+    if (isset($room_id)) 
+    {
         // consultar mesas de $room_id
         $sql_mesas = "SELECT t.id as table_id, t.name as table_name, t.available as available, 
                         IF(t.available=1, 'Disponible', 'Ocupada') as table_available,
@@ -27,10 +30,14 @@ try {
         $stmt_mesas->execute();
         $resultado_mesas = $stmt_mesas->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!$resultado_mesas) {
+        if (!$resultado_mesas) 
+        {
             die('Error: Unable to fetch table data');
         }
-    } else {
+    } 
+    
+    else 
+    {
         // consultar salas
         $sql_salas = "SELECT r.id as room_id, 
                         CASE 
@@ -49,14 +56,21 @@ try {
         $stmt_salas->execute();
         $resultado_salas = $stmt_salas->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!$resultado_salas) {
+        if (!$resultado_salas) 
+        {
             die('Error: Unable to fetch room data');
         }
     }
-} catch (PDOException $e) {
+} 
+
+catch (PDOException $e) 
+{
     echo "Error al leer la base de datos: " . $e->getMessage();
     die();
-} finally {
+} 
+
+finally 
+{
     $pdo = null;
 }
 ?>
@@ -108,11 +122,6 @@ try {
                     </div>
 
                     <div class="form-group">
-                        <label for="nombresala">Nombre:</label>
-                        <input type="text" id="nombresala" name="nombresala" required>
-                    </div>
-
-                    <div class="form-group">
                         <label for="imagenSala">Imagen de la Sala:</label>
                         <input type="file" id="imagenSala" name="imagenSala" accept="image/*" required>
                     </div>
@@ -138,20 +147,27 @@ try {
 
                     <div class="row content-gestion-content">
                         <?php
-                        if (isset($room_id)) { // imprimir mesas de sala
-                            foreach ($resultado_mesas as $mesa) {
+                        if (isset($room_id)) 
+                        { // imprimir mesas de sala
+                            foreach ($resultado_mesas as $mesa) 
+                            {
                                 echo '
                                     <div class="column-5 content-gestion-content-item" onClick="SendMesa(\'' . $mesa["table_id"] . '\',\'' . $mesa["available"] . '\',\'' . $room_id . '\')">
                                         <div class="content-gestion-content-item-image">
                                             <img src="./img/room_table.png" alt="">
                                         </div>
+
                                         <div class="content-gestion-content-item-bottom" style="background-color: ' . $mesa["table_color"] . '">
                                             <span><span class="hideAtSmall">' . $mesa["table_name"] . ': </span>' . $mesa["table_available"] . '</span>
                                         </div>
                                     </div>';
                             }
-                        } else { // imprimir salas
-                            foreach ($resultado_salas as $sala) {
+                        } 
+                        
+                        else 
+                        { // imprimir salas
+                            foreach ($resultado_salas as $sala) 
+                            {
                                 echo '
                                     <div class="column-5 content-gestion-content-item" onclick="window.location.href= \'CRUD_MESAS.php?room=' . $sala["room_id"] . '\'">
                                         <div class="content-gestion-content-item-image">
@@ -173,13 +189,12 @@ try {
     <!-- Script para las validaciones -->
     <script>
         function validarFormulario() {
-            var nombresala =document.getElementById('nombresakla').value;
             var tipoSala = document.getElementById('tipoSala').value;
             var imagenSala = document.getElementById('imagenSala').value;
             var cantidadMesas = document.getElementById('cantidadMesas').value;
 
             // Validaciones
-            if (nombresala === '' || tipoSala === "" || imagenSala === "" || cantidadMesas === "") {
+            if (tipoSala === "" || imagenSala === "" || cantidadMesas === "") {
                 alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
                 return;
             }
@@ -189,20 +204,11 @@ try {
                 return;
             }
 
-            // Validación de formato de nombre y apellido (solo letras)
-            var regexLetras = /^[a-zA-Z\s]*$/; // Acepta solo letras y espacios
-
-            if (!regexLetras.test(nombresala)) 
-            {
-                alert("Nombre sala solo puede contener letras y espacios.");
-                return;
-            }
-
             // Si pasa las validaciones, puedes enviar el formulario o realizar otras acciones.
             document.getElementById('salaForm').submit();
         }
 
-        function SendMesa(nombresala,id_mesa, mesa_disponible, room_id) {
+        function SendMesa(id_mesa, mesa_disponible, room_id) {
             document.getElementById("form_room_id").value = room_id;
             document.getElementById("form_table").value = id_mesa;
             document.getElementById("form_table_available").value = mesa_disponible;
