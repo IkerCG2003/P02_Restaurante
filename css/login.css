@@ -1,7 +1,8 @@
 body {
-    margin: 0;
-    font-family: 'Open Sans', 'Quicksand', sans-serif;
-    background: #218DCB;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    background-image: url(../img/bg_pattern.png);
+    background-size: 800px;
 }
 
 #cont-form {

@@ -2,7 +2,7 @@
     session_start();
     if (!isset($_SESSION["email"])) 
     {
-        header("location: ../index.php");
+        header("location: ./index.php");
         exit();
     }
 
@@ -85,7 +85,7 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row-header">
             <div class="column-1 header">
                 <div class="header-left"></div>
                 <div class="header-center">

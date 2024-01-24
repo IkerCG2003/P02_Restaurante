@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <!-- CSS -->
         <link rel="stylesheet" href="./css/login.css">
-        <link rel="stylesheet" href="./css/_styles.css">
+        <!-- <link rel="stylesheet" href="./css/_styles.css"> -->
         <!-- Título -->
         <title>Inicio de sesión</title>
     </head>

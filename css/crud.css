@@ -167,7 +167,7 @@ tbody tr:nth-child(even) {
 }
 
 .header-center {
-    width: 90%;
+    width: 80%;
     height: 100%;
     background-image: url(../img/header_center.png);
     background-repeat: no-repeat;
@@ -218,3 +218,13 @@ tbody tr:nth-child(even) {
     padding: 0 20px;
     filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.47));
 }
+
+.content-gestion-header-return {
+    padding-top: 0.5%;
+    background-color: rgb(100, 158, 229);
+    cursor: pointer;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
