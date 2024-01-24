@@ -50,7 +50,7 @@ label {
 
 input[type="text"],
 input[type="number"],
-select, input[type="file"] {
+select {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -264,6 +264,42 @@ button:hover {
     text-align: center;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+/* Estilos para hacer la tabla más atractiva */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-size: 16px; /* Ajusta el tamaño de la fuente */
+    table-layout: fixed; /* Fuerza a la tabla a usar el ancho especificado */
+}
+
+th, td {
+    padding: 20px; /* Ajusta el espaciado interno de las celdas */
+    text-align: left;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+thead th {
+    background-color: #55608f;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e8e8e8;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Fondo blanco para filas impares */
+}
+
+#resultado tr {
+    height: 70px; /* Ajusta la altura de las filas */
 }
 
 @media only screen and (max-width: 1200px) {

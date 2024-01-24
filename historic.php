@@ -12,13 +12,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/_styles.css">
+    <link rel="stylesheet" href="./css/historico.css">
     <title>Histórico</title>
 </head>
 
 <body>    
     <div class="container">
-        <div class="row">
+        <div class="row-header">
             <div class="column-1 header">
                 <div class="header-left"></div>
                 <div class="header-center">
@@ -27,6 +27,15 @@
                     <h1 class="header-center-exit" onclick="window.location.href='./index.php'">Salir</h1>
                 </div>
                 <div class="header-right"></div>
+            </div>
+        </div>
+
+        <div class="row content-gestion-header">
+            <div class="column-79 content-gestion-header-title">
+                <h1>Histórico</h1>
+            </div>
+            <div class="column-5 content-gestion-header-return" onclick="window.location.href='./CRUD_MESAS.php'">
+                <h1>Atrás</h1>
             </div>
         </div>
 

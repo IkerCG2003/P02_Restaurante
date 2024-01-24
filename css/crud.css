@@ -42,7 +42,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"], select {
+input[type="text"], select, img {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -79,6 +79,7 @@ tbody tr:nth-child(even) {
 #resultado tr {
     height: 50px;
 }
+
 
 /* Estilos para combinar los botones en la columna "acciones" */
 .acciones-btns {

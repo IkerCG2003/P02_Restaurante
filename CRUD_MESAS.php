@@ -97,7 +97,7 @@ try {
 
         <div class="row">
             <div class="column-3 sidebar" id="cont-form">
-                <form id="salaForm">
+                <form id="salaForm" method="POST" action="add_mesa.php">
                     <div class="form-group">
                         <label for="tipoSala">Tipo de Sala:</label>
                         <select id="tipoSala" name="tipoSala" required>
@@ -105,6 +105,11 @@ try {
                             <option value="hall">Comedor</option>
                             <option value="private">Sala Privada</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombresala">Nombre:</label>
+                        <input type="text" id="nombresala" name="nombresala" required>
                     </div>
 
                     <div class="form-group">
@@ -168,12 +173,13 @@ try {
     <!-- Script para las validaciones -->
     <script>
         function validarFormulario() {
+            var nombresala =document.getElementById('nombresakla').value;
             var tipoSala = document.getElementById('tipoSala').value;
             var imagenSala = document.getElementById('imagenSala').value;
             var cantidadMesas = document.getElementById('cantidadMesas').value;
 
             // Validaciones
-            if (tipoSala === "" || imagenSala === "" || cantidadMesas === "") {
+            if (nombresala === '' || tipoSala === "" || imagenSala === "" || cantidadMesas === "") {
                 alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
                 return;
             }
@@ -183,11 +189,20 @@ try {
                 return;
             }
 
+            // Validación de formato de nombre y apellido (solo letras)
+            var regexLetras = /^[a-zA-Z\s]*$/; // Acepta solo letras y espacios
+
+            if (!regexLetras.test(nombresala)) 
+            {
+                alert("Nombre sala solo puede contener letras y espacios.");
+                return;
+            }
+
             // Si pasa las validaciones, puedes enviar el formulario o realizar otras acciones.
             document.getElementById('salaForm').submit();
         }
 
-        function SendMesa(id_mesa, mesa_disponible, room_id) {
+        function SendMesa(nombresala,id_mesa, mesa_disponible, room_id) {
             document.getElementById("form_room_id").value = room_id;
             document.getElementById("form_table").value = id_mesa;
             document.getElementById("form_table_available").value = mesa_disponible;
