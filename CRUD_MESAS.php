@@ -100,9 +100,9 @@ try {
                     <div class="form-group">
                         <label for="tipoSala">Tipo de Sala:</label>
                         <select id="tipoSala" name="tipoSala" required>
-                            <option value="terrace">Terraza</option>
-                            <option value="hall">Comedor</option>
-                            <option value="private">Sala Privada</option>
+                            <option value="terrace" name="terrace">Terraza</option>
+                            <option value="hall" value="hall">Comedor</option>
+                            <option value="private" name="private">Sala Privada</option>
                         </select>
                     </div>
 

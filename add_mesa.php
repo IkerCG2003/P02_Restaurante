@@ -7,19 +7,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cantidadMesas = $_POST['cantidadMesas'];
 
     // Generar nombre único para la sala
-    if ($tipoSala = 'terrace') 
+    if ($tipoSala === 'terrace') 
     {
         $tipoSala = 'Terraza';
     }
 
-    elseif ($tipoSala = 'hall') 
+    elseif ($tipoSala === 'hall') 
     {
         $tipoSala = 'Comedor';
     }
 
-    else
+    elseif ($tipoSala === 'private') 
     {
         $tipoSala = 'Sala Privada';
+    }
+    else
+    {
+        header('Location: ./CRUD_MESAS.php?error=notiposala');
     }
 
     $nombreSala = $tipoSala . ' ' . random_int(1 , 50);
@@ -41,9 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Generar nombres y capacidades de mesa
         for ($i = 1; $i <= $cantidadMesas; $i++) {
-            $nombreMesa = $nombreSala . '_' . sprintf('%02d', $i);
+            // Formato de dos dígitos para el número de mesa
+            $numeroMesa = sprintf('%02d', $i);
+            
+            // Construir el nombre de la mesa utilizando el formato
+            $nombreMesa = $numeroMesa;
+            
+            // Generar capacidad de mesa aleatoria
             $capacidadMesa = rand(1, 5);
 
+            // Asignar valores a los parámetros y ejecutar la consulta
             $stmt->bindParam(':nombreMesa', $nombreMesa);
             $stmt->bindParam(':capacidadMesa', $capacidadMesa);
             $stmt->bindParam(':room_id', $room_id);
