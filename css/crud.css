@@ -112,7 +112,7 @@ tbody tr:nth-child(even) {
     margin-top: 20px;
 }
 
-#resultadopaginacion button {
+#resultadopaginacion a {
     margin: 0 5px;
     padding: 10px 15px;
     cursor: pointer;
@@ -120,11 +120,14 @@ tbody tr:nth-child(even) {
     color: #fff;
     border: none;
     border-radius: 5px;
+    text-decoration: none;
 }
 
-#resultadopaginacion button:hover {
+#resultadopaginacion a:hover {
     background-color: #3347a0;
+    text-decoration: none;
 }
+
 
 #btn-enviar{
     background-color: #55608f;

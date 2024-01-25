@@ -266,6 +266,26 @@ button:hover {
     border-bottom-right-radius: 10px;
 }
 
+#resultadopaginacion {
+    text-align: center;
+}
+
+#pagination a {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+    background-color: #3498db; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+}
+
+#pagination a.active {
+    background-color: #2980b9; /* Color de fondo del botón activo */
+}
+
+
 @media only screen and (max-width: 1200px) {
     .header-center-index {
         margin-left: 6%;

@@ -11,27 +11,44 @@ if (isset($_GET["room"])) {
     $room_id = htmlspecialchars($_GET["room"], ENT_QUOTES, 'UTF-8');
 }
 
+// Número de resultados por página
+$resultadosPorPagina = 10;
+
+// Número de página actual (por defecto es 1 si no se proporciona)
+$paginaActual = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calcular el índice de inicio para la consulta
+$indiceInicio = ($paginaActual - 1) * $resultadosPorPagina;
+
 try {
     $pdo = new PDO("mysql:host=$dbserver;dbname=$dbbasedatos", $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if (isset($room_id)) {
-        // consultar mesas de $room_id
+        // Consultar mesas de $room_id con paginación
         $sql_mesas = "SELECT t.id as table_id, t.name as table_name, t.available as available, 
                         IF(t.available=1, 'Disponible', 'Ocupada') as table_available,
                         IF(t.available=1, 'green', 'red') as table_color 
-                FROM `table` t WHERE t.room_id = :room_id";
+                FROM `table` t WHERE t.room_id = :room_id LIMIT :inicio, :porPagina";
 
         $stmt_mesas = $pdo->prepare($sql_mesas);
         $stmt_mesas->bindParam(':room_id', $room_id, PDO::PARAM_INT);
+        $stmt_mesas->bindParam(':inicio', $indiceInicio, PDO::PARAM_INT);
+        $stmt_mesas->bindParam(':porPagina', $resultadosPorPagina, PDO::PARAM_INT);
         $stmt_mesas->execute();
         $resultado_mesas = $stmt_mesas->fetchAll(PDO::FETCH_ASSOC);
 
         if (!$resultado_mesas) {
             die('Error: Unable to fetch table data');
         }
+
+        // Obtener el total de mesas para la paginación
+        $stmt_total_mesas = $pdo->prepare("SELECT COUNT(*) FROM `table` WHERE room_id = :room_id");
+        $stmt_total_mesas->bindParam(':room_id', $room_id, PDO::PARAM_INT);
+        $stmt_total_mesas->execute();
+        $totalResultados = $stmt_total_mesas->fetchColumn();
     } else {
-        // consultar salas
+        // Consultar salas con paginación
         $sql_salas = "SELECT r.id as room_id, 
                         CASE 
                             WHEN r.name LIKE '%Terraza%' THEN 'terrace'
@@ -43,15 +60,24 @@ try {
                         SUM(IF(t.available=1, 1, 0)) as table_available 
                 FROM room r 
                 INNER JOIN `table` t ON t.room_id = r.id 
-                GROUP BY r.id";
+                GROUP BY r.id
+                LIMIT :inicio, :porPagina";
 
         $stmt_salas = $pdo->prepare($sql_salas);
+        $stmt_salas->bindParam(':inicio', $indiceInicio, PDO::PARAM_INT);
+        $stmt_salas->bindParam(':porPagina', $resultadosPorPagina, PDO::PARAM_INT);
         $stmt_salas->execute();
         $resultado_salas = $stmt_salas->fetchAll(PDO::FETCH_ASSOC);
 
         if (!$resultado_salas) {
             die('Error: Unable to fetch room data');
         }
+
+        // Obtener el total de salas para la paginación
+        $totalResultados = $pdo->query("SELECT COUNT(*) FROM room")->fetchColumn();
+
+        // Calcular el total de páginas
+        $totalPaginas = ceil($totalResultados / $resultadosPorPagina);
     }
 } catch (PDOException $e) {
     echo "Error al leer la base de datos: " . $e->getMessage();
@@ -60,7 +86,6 @@ try {
     $pdo = null;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,6 +119,8 @@ try {
             </div>
         </div>
 
+        <br>
+
         <div class="row">
             <div class="column-3 sidebar" id="cont-form">
                 <form id="salaForm" method="POST" action="add_mesa.php">
@@ -125,22 +152,16 @@ try {
 
                     <div class="row content-gestion-content">
                         <?php
-                        if (isset($room_id)) 
-                        { // imprimir mesas de sala
-                            foreach ($resultado_mesas as $mesa) 
-                            {
-                                $imagenMesa = "./img/room_table.png"; // Ruta por defecto
+                        if (isset($room_id)) { // imprimir mesas de sala
+                            for ($i = 0; $i < $resultadosPorPagina; $i++) {
+                                // Check if there are enough elements in the array
+                                if (isset($resultado_mesas[$i])) {
+                                    $mesa = $resultado_mesas[$i];
+                                    $imagenMesa = "./img/room_table.png"; // Ruta por defecto
 
-                                // Lógica para obtener la imagen de la mesa del directorio
-                                $directorioImagenes = "./img/mesas/"; // Ruta del directorio de imágenes
-                                $nombreImagen = "mesa_" . $mesa["table_id"] . ".png"; // Nombre único de la imagen
-                                $rutaCompleta = $directorioImagenes . $nombreImagen;
+                                    // Resto de tu código para obtener la imagen de la mesa
 
-                                if (file_exists($rutaCompleta)) {
-                                    $imagenMesa = $rutaCompleta;
-                                }
-
-                                echo '
+                                    echo '
                                     <div class="column-5 content-gestion-content-item" onClick="SendMesa(\'' . $mesa["table_id"] . '\',\'' . $mesa["available"] . '\',\'' . $room_id . '\')">
                                         <div class="content-gestion-content-item-image">
                                             <img src="' . $imagenMesa . '" alt="">
@@ -150,14 +171,17 @@ try {
                                             <span><span class="hideAtSmall">' . $mesa["table_name"] . ': </span>' . $mesa["table_available"] . '</span>
                                         </div>
                                     </div>';
+                                } else {
+                                    // Print blank cells with a specific class for styling
+                                    echo '<div class="column-5 content-gestion-content-item content-gestion-content-item-empty"></div>';
+                                }
                             }
-                        } 
-                        
-                        else 
-                        { // imprimir salas
-                            foreach ($resultado_salas as $sala) 
-                            {
-                                echo '
+                        } else { // imprimir salas
+                            for ($i = 0; $i < $resultadosPorPagina; $i++) {
+                                // Check if there are enough elements in the array
+                                if (isset($resultado_salas[$i])) {
+                                    $sala = $resultado_salas[$i];
+                                    echo '
                                     <div class="column-5 content-gestion-content-item" onclick="window.location.href= \'CRUD_MESAS.php?room=' . $sala["room_id"] . '\'">
                                         <div class="content-gestion-content-item-image">
                                             <img src="./img/room_' . $sala["room_name"] . '.png" alt="">
@@ -167,46 +191,58 @@ try {
                                             <span><span class="hideAtSmall">Mesas:</span> ' . $sala["table_available"] . '/' . $sala["table_count"] . '</span>
                                         </div>
                                     </div>';
+                                } else {
+                                    // Print blank cells with a specific class for styling
+                                    echo '<div class="column-5 content-gestion-content-item content-gestion-content-item-empty"></div>';
+                                }
                             }
                         }
                         ?>
                     </div>
+
+                    <div class="column-12 pagination-row" id="resultadopaginacion">
+                        <div id="pagination">
+                            <?php
+                            // Imprimir enlaces de paginación
+                            for ($i = 1; $i <= $totalPaginas; $i++) {
+                                echo '<a href="?page=' . $i . '" ' . ($i == $paginaActual ? 'class="active"' : '') . '>' . $i . '</a>';
+                            }
+                            ?>
+                        </div>
+                    </div>                
                 </div>
             </div>
         </div>
+
+        <!-- Script para las validaciones -->
+        <script>
+            function validarFormulario() {
+                var tipoSala = document.getElementById('tipoSala').value;
+                var cantidadMesas = document.getElementById('cantidadMesas').value;
+
+                // Validaciones
+                if (tipoSala === "" || cantidadMesas === "") {
+                    alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
+                    return;
+                }
+
+                if (parseInt(cantidadMesas) < 0) {
+                    alert("La cantidad de mesas no puede ser un número negativo.");
+                    return;
+                }
+
+                // Si pasa las validaciones, puedes enviar el formulario o realizar otras acciones.
+                document.getElementById('salaForm').submit();
+            }
+
+            function SendMesa(id_mesa, mesa_disponible, room_id) {
+                document.getElementById("form_room_id").value = room_id;
+                document.getElementById("form_table").value = id_mesa;
+                document.getElementById("form_table_available").value = mesa_disponible;
+                document.forms['formMesa'].submit();
+            }
+        </script>
     </div>
-
-<!-- Script para las validaciones -->
-<script>
-        function validarFormulario() 
-        {
-            var tipoSala = document.getElementById('tipoSala').value;
-            var cantidadMesas = document.getElementById('cantidadMesas').value;
-
-            // Validaciones
-            if (tipoSala === "" || cantidadMesas === "") 
-            {
-                alert("Todos los campos son obligatorios. Por favor, completa el formulario.");
-                return;
-            }
-
-            if (parseInt(cantidadMesas) < 0) 
-            {
-                alert("La cantidad de mesas no puede ser un número negativo.");
-                return;
-            }
-
-            // Si pasa las validaciones, puedes enviar el formulario o realizar otras acciones.
-            document.getElementById('salaForm').submit();
-        }
-
-        function SendMesa(id_mesa, mesa_disponible, room_id) 
-        {
-            document.getElementById("form_room_id").value = room_id;
-            document.getElementById("form_table").value = id_mesa;
-            document.getElementById("form_table_available").value = mesa_disponible;
-            document.forms['formMesa'].submit();
-        }
-    </script>
 </body>
+
 </html>
